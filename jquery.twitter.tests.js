@@ -3,6 +3,7 @@ var originalAjax = $.ajax;
 QUnit.testDone = function() {
   $.ajax = originalAjax;
   $(".workspace").empty();
+  localStorage.clear();
 };
 
 function stubTwitterErrorResponse(status) {
@@ -47,6 +48,11 @@ describe("$.twitter", function() {
   it("should be able to favorite tweets", function() {
     $.twitter.addFavorite("awesome");
     $.twitter.favorites().should(include, "awesome");
+  });
+
+  it("should use local storage for favorites", function() {
+    $.twitter.addFavorite("awesome");
+    JSON.parse(localStorage.favorites).should(eql, ["awesome"]);
   });
 });
 

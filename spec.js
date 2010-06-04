@@ -59,7 +59,7 @@ var SpecIt = {
     },
     eql: function() {
       if(SpecIt.currentExpectation === 'should') {
-        equals(this,
+        same(this,
                arguments[0],
                "Expected " + this + " to equal " + arguments[0]);
       } else {
